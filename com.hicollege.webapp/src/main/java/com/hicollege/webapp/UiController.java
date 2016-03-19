@@ -10,8 +10,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UiController {
     
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/foo", method = RequestMethod.GET)
     public String hello() {
         return "Hello World!";
+    }
+    
+    @RequestMapping(method = RequestMethod.GET)
+    public String ui() {
+        return "ui/ui";
+    }
+    
+    @RequestMapping(value = "/album", method = RequestMethod.GET)
+    public String uiAlbums() {
+        return "ui/ui_album";
     }
 }
