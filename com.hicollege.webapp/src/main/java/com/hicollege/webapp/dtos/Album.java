@@ -4,14 +4,18 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "albums")
+@Table(name = "albums", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
 public class Album {
     
     private int album_id;
     private String title;
     private List<String> songs;
     private List<String> artists;
+    private List<User> users;
+    
     
     @Id
     @GeneratedValue
@@ -57,5 +61,16 @@ public class Album {
     
     public void setArtists(List<String> artists) {
         this.artists = artists;
+    }
+    
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "albums")
+    @JsonIgnore
+    public List<User> getUsers() {
+        return users;
+    }
+
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

@@ -22,9 +22,17 @@ public class CreationController {
     public void addUser(
         @RequestParam(value = "username", required = true) String username,
         @RequestParam(value = "email",    required = true) String email,
-        @RequestParam(value = "age",      required = true) int age) {
+        @RequestParam(value = "age",      required = true) int age,
+        @RequestParam(value = "albums",   required = false) List<String> albums) {
         
         User newUser = new User(username, email, Integer.toString(age));
+        if(albums != null) {
+            for(String title : albums) {
+                Album album = dao.findAlbumByTitle(title);
+                newUser.getAlbums().add(album);
+            }
+        }
+        
         dao.saveUser(newUser);
     }
     

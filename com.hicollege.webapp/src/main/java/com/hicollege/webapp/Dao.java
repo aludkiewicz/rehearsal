@@ -36,5 +36,19 @@ public class Dao {
     public void saveAlbum(Album album) {
         sessionFactory.getCurrentSession().save(album);
     }
+    
+    @SuppressWarnings("unchecked")
+    @Transactional
+    public List<Album> getAllAlbums() {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Album");
+        return (List<Album>) query.list();
+    }
+    
+    @Transactional
+    public Album findAlbumByTitle(String title) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Album as a where a.title= :title");
+        query.setParameter("title", title);
+        return (Album) query.uniqueResult();
+    }
 
 }
