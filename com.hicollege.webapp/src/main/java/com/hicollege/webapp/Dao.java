@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hicollege.webapp.dtos.Album;
 import com.hicollege.webapp.dtos.User;
 
 @Component
@@ -29,6 +30,11 @@ public class Dao {
         Query query = sessionFactory.getCurrentSession().createQuery("from User");
         
         return (List<User>) query.list();
+    }
+    
+    @Transactional
+    public void saveAlbum(Album album) {
+        sessionFactory.getCurrentSession().save(album);
     }
 
 }
