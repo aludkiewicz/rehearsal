@@ -10,8 +10,8 @@ startApp.controller('hicollege_ctrl', function ($scope, $http, $log) {
             params: {
             	username: $scope.username,
             	email: $scope.email,
-            	age: $scope.age,
-            	albums: $scope.user_albums
+            	age: $scope.age
+//            	albums: $scope.user_albums
             }
     	}).
         success(function (data, status, headers, config) {
